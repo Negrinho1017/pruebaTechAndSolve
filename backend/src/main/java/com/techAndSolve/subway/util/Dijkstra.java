@@ -9,47 +9,47 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.techAndSolve.subway.dominio.Edge;
-import com.techAndSolve.subway.dominio.Graph;
-import com.techAndSolve.subway.dominio.Vertex;
+import com.techAndSolve.subway.dominio.CaminoEntreEstaciones;
+import com.techAndSolve.subway.dominio.RutaGeneral;
+import com.techAndSolve.subway.dominio.Estacion;
 
 public class Dijkstra {
 
-    private final List<Vertex> nodes;
-    private final List<Edge> edges;
-    private Set<Vertex> settledNodes;
-    private Set<Vertex> unSettledNodes;
-    private Map<Vertex, Vertex> predecessors;
-    private Map<Vertex, Integer> distance;
+    private final List<Estacion> nodes;
+    private final List<CaminoEntreEstaciones> edges;
+    private Set<Estacion> settledNodes;
+    private Set<Estacion> unSettledNodes;
+    private Map<Estacion, Estacion> predecessors;
+    private Map<Estacion, Integer> distance;
 
-    public Dijkstra(Graph graph) {
+    public Dijkstra(RutaGeneral graph) {
         // create a copy of the array so that we can operate on this array
-        this.nodes = new ArrayList<Vertex>(graph.getVertexes());
-        this.edges = new ArrayList<Edge>(graph.getEdges());
+        this.nodes = new ArrayList<Estacion>(graph.getVertexes());
+        this.edges = new ArrayList<CaminoEntreEstaciones>(graph.getEdges());
     }
 
-    public void execute(Vertex source) {
-        settledNodes = new HashSet<Vertex>();
-        unSettledNodes = new HashSet<Vertex>();
-        distance = new HashMap<Vertex, Integer>();
-        predecessors = new HashMap<Vertex, Vertex>();
+    public void execute(Estacion source) {
+        settledNodes = new HashSet<Estacion>();
+        unSettledNodes = new HashSet<Estacion>();
+        distance = new HashMap<Estacion, Integer>();
+        predecessors = new HashMap<Estacion, Estacion>();
         distance.put(source, 0);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {
-            Vertex node = getMinimum(unSettledNodes);
+            Estacion node = getMinimum(unSettledNodes);
             settledNodes.add(node);
             unSettledNodes.remove(node);
             findMinimalDistances(node);
         }
     }
 
-    private void findMinimalDistances(Vertex node) {
-        List<Vertex> adjacentNodes = getNeighbors(node);
-        for (Vertex target : adjacentNodes) {
+    public void findMinimalDistances(Estacion node) {
+        List<Estacion> adjacentNodes = getNeighbors(node);
+        for (Estacion target : adjacentNodes) {
             if (getShortestDistance(target) > getShortestDistance(node)
-                    + getDistance(node, target)) {
+                    + getTime(node, target)) {
                 distance.put(target, getShortestDistance(node)
-                        + getDistance(node, target));
+                        + getTime(node, target));
                 predecessors.put(target, node);
                 unSettledNodes.add(target);
             }
@@ -57,8 +57,8 @@ public class Dijkstra {
 
     }
 
-    private int getDistance(Vertex node, Vertex target) {
-        for (Edge edge : edges) {
+    public int getTime(Estacion node, Estacion target) {
+        for (CaminoEntreEstaciones edge : edges) {
             if (edge.getSource().equals(node)
                     && edge.getDestination().equals(target)) {
                 return edge.getWeight();
@@ -67,9 +67,9 @@ public class Dijkstra {
         throw new RuntimeException("Should not happen");
     }
 
-    private List<Vertex> getNeighbors(Vertex node) {
-        List<Vertex> neighbors = new ArrayList<Vertex>();
-        for (Edge edge : edges) {
+    public List<Estacion> getNeighbors(Estacion node) {
+        List<Estacion> neighbors = new ArrayList<Estacion>();
+        for (CaminoEntreEstaciones edge : edges) {
             if (edge.getSource().equals(node)
                     && !isSettled(edge.getDestination())) {
                 neighbors.add(edge.getDestination());
@@ -78,9 +78,9 @@ public class Dijkstra {
         return neighbors;
     }
 
-    private Vertex getMinimum(Set<Vertex> vertexes) {
-        Vertex minimum = null;
-        for (Vertex vertex : vertexes) {
+    public Estacion getMinimum(Set<Estacion> vertexes) {
+        Estacion minimum = null;
+        for (Estacion vertex : vertexes) {
             if (minimum == null) {
                 minimum = vertex;
             } else {
@@ -92,11 +92,11 @@ public class Dijkstra {
         return minimum;
     }
 
-    private boolean isSettled(Vertex vertex) {
+    public boolean isSettled(Estacion vertex) {
         return settledNodes.contains(vertex);
     }
 
-    private int getShortestDistance(Vertex destination) {
+    public int getShortestDistance(Estacion destination) {
         Integer d = distance.get(destination);
         if (d == null) {
             return Integer.MAX_VALUE;
@@ -109,9 +109,9 @@ public class Dijkstra {
      * This method returns the path from the source to the selected target and
      * NULL if no path exists
      */
-    public LinkedList<Vertex> getPath(Vertex target) {
-        LinkedList<Vertex> path = new LinkedList<Vertex>();
-        Vertex step = target;
+    public LinkedList<Estacion> getPath(Estacion target) {
+        LinkedList<Estacion> path = new LinkedList<Estacion>();
+        Estacion step = target;
         // check if a path exists
         if (predecessors.get(step) == null) {
             return null;

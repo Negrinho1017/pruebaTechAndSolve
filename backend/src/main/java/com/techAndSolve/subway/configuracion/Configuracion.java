@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.MongoClient;
+import com.techAndSolve.subway.persistencia.implementacion.RutaGeneralDAOImplementacion;
 import com.techAndSolve.subway.servicio.AdministradorDeRutas;
 
 @Configuration
@@ -22,8 +23,8 @@ public class Configuracion {
 	private String nombreDB;
 	
 	@Bean
-	public AdministradorDeRutas crearProbador(MongoOperations mongoOperations) {
-		return new AdministradorDeRutas(mongoOperations);
+	public RutaGeneralDAOImplementacion crearRutaGeneralDAO(MongoOperations mongoOperations) {
+		return new RutaGeneralDAOImplementacion(mongoOperations);
 	}
 	
 	@Bean
@@ -35,5 +36,10 @@ public class Configuracion {
 	@Bean
 	public MongoOperations crearMongoTemplate() {	
 		return new MongoTemplate(crearMongoClient(), nombreDB);
+	}
+	
+	@Bean
+	public AdministradorDeRutas crearAdministradorPruebas() {
+		return new AdministradorDeRutas();
 	}
 }

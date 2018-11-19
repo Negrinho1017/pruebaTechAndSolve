@@ -1,11 +1,11 @@
 package com.techAndSolve.subway.dominio;
 
-public class Vertex {
+public class Estacion {
     final private String id;
     final private String name;
 
 
-    public Vertex(String id, String name) {
+    public Estacion(String id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -33,7 +33,7 @@ public class Vertex {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Vertex other = (Vertex) obj;
+        Estacion other = (Estacion) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
