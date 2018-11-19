@@ -32,7 +32,7 @@ public class PruebaTechApplicationTests {
 		//administradorDeRutas.probar();
 	}
 	
-	@Test
+	/*@Test
 	public void dijkstraTest() {
 		Estacion v1 = new Estacion("1","1");
 		Estacion v2 = new Estacion("2","2");
@@ -150,6 +150,6 @@ public class PruebaTechApplicationTests {
         dijkstra.execute(rutaGeneral.getVertexes().get(9));
         LinkedList<Estacion> path = dijkstra.getPath(rutaGeneral.getVertexes().get(0));
         System.out.println(path);
-	}
+	}*/
 
 }

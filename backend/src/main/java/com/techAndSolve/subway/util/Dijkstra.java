@@ -28,7 +28,15 @@ public class Dijkstra {
         this.edges = new ArrayList<CaminoEntreEstaciones>(graph.getEdges());
     }
 
-    public void execute(Estacion source) {
+    public List<Estacion> getNodes() {
+		return nodes;
+	}
+
+	public List<CaminoEntreEstaciones> getEdges() {
+		return edges;
+	}
+
+	public void execute(Estacion source) {
         settledNodes = new HashSet<Estacion>();
         unSettledNodes = new HashSet<Estacion>();
         distance = new HashMap<Estacion, Integer>();
