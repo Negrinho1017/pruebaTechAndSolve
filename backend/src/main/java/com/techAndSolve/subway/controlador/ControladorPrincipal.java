@@ -40,12 +40,18 @@ public class ControladorPrincipal {
 				estacionOrigen, estacionDestino));
 	}
 	
-	@RequestMapping(value = "/creacion-usuario/{estacionOrigen}/{estacionDestino}", method = RequestMethod.POST)
+	@RequestMapping(value = "/existe-el-usuario", method = RequestMethod.GET)
 	@ResponseBody
-	public void crearUsuario(@RequestBody Usuario usuario,
+	public boolean obtenerTiempo(@RequestParam String idUsuario)  {
+		return administradorDeRutas.existeElUsuario(idUsuario);
+	}
+	
+	@RequestMapping(value = "/creacion-respuesta/{estacionOrigen}/{estacionDestino}", method = RequestMethod.POST)
+	@ResponseBody
+	public void crearRespuesta(@RequestBody Usuario usuario,
 			@PathVariable(value = "estacionOrigen") int estacionOrigen,
 			@PathVariable(value = "estacionDestino") int estacionDestino) {
-		administradorDeRutas.crearUsuario(usuario.getIdentificacion(),
+		administradorDeRutas.crearRespuesta(usuario.getIdentificacion(),
 				new Consulta(estacionOrigen, estacionDestino));
 	}
 }

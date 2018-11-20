@@ -67,9 +67,17 @@ public class AdministradorDeRutas {
         		consulta.getEstacionDestino()-1));
 	}
 	
-	public void crearUsuario(String idUsuario, Consulta consulta) {
+	public void crearRespuesta(String idUsuario, Consulta consulta) {
 		Respuesta respuesta = new Respuesta(obtenerTiempo(consulta),
 				consulta, new ArrayList<>(obtenerRutaMasCercana(consulta)));
-		consultasYRespuestasDAO.crearUsuario(respuesta, idUsuario);
+		if(existeElUsuario(idUsuario)) {
+			consultasYRespuestasDAO.actualizarUsuario(respuesta, idUsuario);
+		}else {
+			consultasYRespuestasDAO.crearUsuario(respuesta, idUsuario);
+		}	
+	}
+	
+	public boolean existeElUsuario(String idUsuario) {
+		return consultasYRespuestasDAO.existeElUsuario(idUsuario);
 	}
 }

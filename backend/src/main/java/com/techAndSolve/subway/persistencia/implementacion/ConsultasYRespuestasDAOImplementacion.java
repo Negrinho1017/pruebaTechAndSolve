@@ -1,10 +1,16 @@
 package com.techAndSolve.subway.persistencia.implementacion;
 
+import static org.springframework.data.mongodb.core.query.Criteria.where;
+import static org.springframework.data.mongodb.core.query.Query.query;
+import static org.springframework.data.mongodb.core.query.Update.update;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.Usuario;
@@ -35,6 +41,22 @@ public class ConsultasYRespuestasDAOImplementacion implements ConsultasYRespuest
 	public List<Respuesta> obtenerRespuestasPorUsuario(String idUsuario) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean existeElUsuario(String idUsuario) {
+		Query usuario = query(where("identificacion").is(idUsuario));
+		return mongoOperations.exists(usuario, USUARIO);
+	}
+
+	@Override
+	public void actualizarUsuario(Respuesta respuesta, String idUsuario) {
+		Query usuario = query(where("identificacion").is(idUsuario));
+		Usuario usuarioPorId = mongoOperations.find(usuario, Usuario.class, USUARIO).get(0);
+		List<Respuesta> respuestas = usuarioPorId.getRespuestasObtenidas();
+		respuestas.add(respuesta);
+		Update actualizacionRespuestas = update("respuestasObtenidas", respuestas);
+		mongoOperations.updateFirst(usuario, actualizacionRespuestas, Usuario.class, USUARIO);
 	}
 
 }

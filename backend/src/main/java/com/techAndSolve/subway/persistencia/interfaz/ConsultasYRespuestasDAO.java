@@ -9,4 +9,8 @@ public interface ConsultasYRespuestasDAO {
 	
 	public List<Respuesta> obtenerRespuestasPorUsuario(String idUsuario);
 	
+	public boolean existeElUsuario(String idUsuario);
+	
+	public void actualizarUsuario(Respuesta respuesta, String idUsuario);
+	
 }
