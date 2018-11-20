@@ -8,7 +8,7 @@ public class Usuario {
 	private String identificacion;
 	private String nombreUsuario;
 	
-	
+	public Usuario() {}
 	public Usuario(int rol, List<Respuesta> respuestasObtenidas, String identificacion, String nombreUsuario) {
 		super();
 		this.rol = rol;

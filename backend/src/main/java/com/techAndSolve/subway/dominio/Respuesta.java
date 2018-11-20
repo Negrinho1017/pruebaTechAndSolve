@@ -5,13 +5,13 @@ import java.util.List;
 public class Respuesta {
 	private int tiempo;
 	private Consulta consultaRealizada;
-	private List<Consulta> consultasPorRuta;
+	private List<Estacion> estaciones;
 	
-	public Respuesta(int tiempo, Consulta consultaRealizada, List<Consulta> consultasPorRuta) {
+	public Respuesta(int tiempo, Consulta consultaRealizada, List<Estacion> estaciones) {
 		super();
 		this.tiempo = tiempo;
 		this.consultaRealizada = consultaRealizada;
-		this.consultasPorRuta = consultasPorRuta;
+		this.estaciones = estaciones;
 	}
 
 	public int getTiempo() {
@@ -30,12 +30,11 @@ public class Respuesta {
 		this.consultaRealizada = consultaRealizada;
 	}
 
-	public List<Consulta> getConsultasPorRuta() {
-		return consultasPorRuta;
+	public List<Estacion> getEstaciones() {
+		return estaciones;
 	}
 
-	public void setConsultasPorRuta(List<Consulta> consultasPorRuta) {
-		this.consultasPorRuta = consultasPorRuta;
+	public void setEstaciones(List<Estacion> estaciones) {
+		this.estaciones = estaciones;
 	}
-	
 }
