@@ -13,7 +13,7 @@ export class ListadoRespuestasAlUsuarioService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.headers });
   constructor(private _http: Http, private http: HttpClient) { }
-
+  
   obtenerRespuestasEntregadasAlUsuario(idUsuario: String): Observable<Respuesta[]>{
     const httpOptions = {
       params: new HttpParams().set('idUsuario', <string>idUsuario)

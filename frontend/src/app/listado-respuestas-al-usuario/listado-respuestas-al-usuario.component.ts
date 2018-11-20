@@ -9,12 +9,18 @@ import { ListadoRespuestasAlUsuarioService } from './listado-respuestas-al-usuar
 })
 export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   respuestas: Respuesta[];
+  idEvaluado: String;
+  usuarioEncontrado: boolean = false;
   constructor( private listadoRespuestasAlUsuarioService: ListadoRespuestasAlUsuarioService ) { }
 
   ngOnInit() {
-    this.listadoRespuestasAlUsuarioService.obtenerRespuestasEntregadasAlUsuario("1017224720")
+  }
+
+  mostrarTabla(){
+    this.listadoRespuestasAlUsuarioService.obtenerRespuestasEntregadasAlUsuario(this.idEvaluado)
     .subscribe(res => {
       this.respuestas = res;
+      this.usuarioEncontrado = true;
     }, error => 
     console.log(error));
   }

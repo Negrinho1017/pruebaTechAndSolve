@@ -1,5 +1,18 @@
 <body class="cuerpo">
-  <table class="table table-striped">
+  
+  <form *ngIf="!usuarioEncontrado">
+    <div class="form-group">
+      <label for="identificacion">Ingrese el número de identificación</label>
+      <input type="text" class="form-control" id="identificacion" [(ngModel)] = "this.idEvaluado" [ngModelOptions]="{standalone: true}"
+      placeholder="Identificación">
+    </div>
+    <button type="button" class="btn btn-dark" (click)="mostrarTabla()">Ingresar</button>
+  </form>
+
+  <button type="button" *ngIf="usuarioEncontrado" class="btn btn-dark" (click)="usuarioEncontrado=false">
+      <i class="fa fa-long-arrow-left"></i> Atrás
+  </button><br><br>
+  <table class="table table-striped" *ngIf="usuarioEncontrado">
     <thead class="thead-dark">
       <tr>
         <th>Estación origen</th>
