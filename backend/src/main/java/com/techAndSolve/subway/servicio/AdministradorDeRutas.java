@@ -1,20 +1,14 @@
 package com.techAndSolve.subway.servicio;
 
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Query;
 
 import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.RutaGeneral;
-import com.techAndSolve.subway.dominio.Rutas;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.util.Dijkstra;
