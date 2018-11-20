@@ -10,6 +10,7 @@ import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.RutaGeneral;
+import com.techAndSolve.subway.dominio.excepcion.SubwayException;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
@@ -17,6 +18,8 @@ import com.techAndSolve.subway.util.Dijkstra;
 
 public class AdministradorDeRutas {
 	
+	private static final String USUARIO_NO_ENCONTRADO = "Usuario no encontrado";
+
 	@Autowired
 	RutaGeneralDAO rutaGeneralDAO;
 	
@@ -81,6 +84,9 @@ public class AdministradorDeRutas {
 	}
 	
 	public List<Respuesta> obtenerRespuestasEntregadasPorElUsuario(String idUsuario){
+		if(!existeElUsuario(idUsuario)) {
+			throw new SubwayException(USUARIO_NO_ENCONTRADO);
+		}
 		return consultasYRespuestasDAO.obtenerRespuestasPorUsuario(idUsuario);
 	}
 	

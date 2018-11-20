@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Respuesta } from '../model/Respuesta';
 import { ListadoRespuestasAlUsuarioService } from './listado-respuestas-al-usuario.service';
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-listado-respuestas-al-usuario',
@@ -21,8 +22,17 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
     .subscribe(res => {
       this.respuestas = res;
       this.usuarioEncontrado = true;
-    }, error => 
-    console.log(error));
+    }, error => {
+      this.mensajeError(error.error.mensaje);
+    });
   }
 
+
+  mensajeError(mensaje: String){
+    swal({
+      type: 'error',
+      title: 'Error!!',
+      text: <string>mensaje
+    })
+  }
 }
