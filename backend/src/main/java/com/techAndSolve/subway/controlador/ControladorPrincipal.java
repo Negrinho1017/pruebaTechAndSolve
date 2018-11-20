@@ -1,6 +1,7 @@
 package com.techAndSolve.subway.controlador;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
+import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.Usuario;
 import com.techAndSolve.subway.servicio.AdministradorDeRutas;
 
@@ -40,10 +42,16 @@ public class ControladorPrincipal {
 				estacionOrigen, estacionDestino));
 	}
 	
-	@RequestMapping(value = "/existe-el-usuario", method = RequestMethod.GET)
+	@RequestMapping(value = "/respuestas-por-usuario", method = RequestMethod.GET)
 	@ResponseBody
-	public boolean obtenerTiempo(@RequestParam String idUsuario)  {
-		return administradorDeRutas.existeElUsuario(idUsuario);
+	public List<Respuesta> obtenerRespuestasEntregadasAlUsuario(@RequestParam String idUsuario)  {
+		return administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario(idUsuario);
+	}
+	
+	@RequestMapping(value = "/rol-usuario", method = RequestMethod.GET)
+	@ResponseBody
+	public int rolDelUsuario(@RequestParam String idUsuario)  {
+		return administradorDeRutas.obtenerRolDelUsuario(idUsuario);
 	}
 	
 	@RequestMapping(value = "/creacion-respuesta/{estacionOrigen}/{estacionDestino}", method = RequestMethod.POST)

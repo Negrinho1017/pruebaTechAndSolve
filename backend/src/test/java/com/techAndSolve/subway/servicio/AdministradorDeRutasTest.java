@@ -1,5 +1,10 @@
 package com.techAndSolve.subway.servicio;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +18,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.techAndSolve.subway.dominio.CaminoEntreEstaciones;
 import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
+import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.RutaGeneral;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AdministradorDeRutasTest {
@@ -33,6 +35,9 @@ public class AdministradorDeRutasTest {
 	@Mock
 	ConsultasYRespuestasDAO consultasYRespuestasDAO;
 	
+	@Mock
+	UsuarioDAO usuarioDAO;
+	
 	Estacion e1;
 	Estacion e2;
 	List<Estacion> estaciones;
@@ -41,6 +46,9 @@ public class AdministradorDeRutasTest {
 	List<CaminoEntreEstaciones> caminos;
 	RutaGeneral rutaGeneral;
 	Consulta consulta;
+	Respuesta r1;
+	Respuesta r2;
+	List<Respuesta> respuestas;
 	
 	@Before
 	public void setUp() { 
@@ -56,6 +64,11 @@ public class AdministradorDeRutasTest {
 		caminos.add(c1_2);
 		caminos.add(c2_1);
 		rutaGeneral = new RutaGeneral(estaciones, caminos);
+		r1 = new Respuesta(20, consulta, estaciones);
+		r2 = new Respuesta(18, consulta, estaciones);
+		respuestas = new ArrayList<>();
+		respuestas.add(r1);
+		respuestas.add(r2);
 	}
 	
 	@Test
@@ -73,8 +86,23 @@ public class AdministradorDeRutasTest {
 	
 	 @Test
 	 public void existeElUsuarioTest(){
-		 when(consultasYRespuestasDAO.existeElUsuario("1234")).thenReturn(true);
+		 when(usuarioDAO.existeElUsuario("1234")).thenReturn(true);
 		 assertTrue(administradorDeRutas.existeElUsuario("1234"));
 		 assertFalse(administradorDeRutas.existeElUsuario("12345"));
+	 }
+	 
+	 @Test
+	 public void obtenerRespuestasEntregadasPorElUsuarioTest() {
+		 when(consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234")).thenReturn(respuestas);
+		 assertEquals(2, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("1234").size());
+		 assertEquals(20, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("1234").get(0).getTiempo());
+		 assertEquals(18, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("1234").get(1).getTiempo());
+		 assertEquals(0, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("12345").size());
+	 }
+	 
+	 @Test
+	 public void obtenerRolDelUsuarioTest() {
+		 when(usuarioDAO.obtenerRolDelUsuario("1234")).thenReturn(1);
+		 assertEquals(1, administradorDeRutas.obtenerRolDelUsuario("1234"));
 	 }
 }

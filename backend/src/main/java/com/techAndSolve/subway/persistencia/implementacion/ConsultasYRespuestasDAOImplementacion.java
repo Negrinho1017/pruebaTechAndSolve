@@ -39,18 +39,12 @@ public class ConsultasYRespuestasDAOImplementacion implements ConsultasYRespuest
 
 	@Override
 	public List<Respuesta> obtenerRespuestasPorUsuario(String idUsuario) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean existeElUsuario(String idUsuario) {
 		Query usuario = query(where("identificacion").is(idUsuario));
-		return mongoOperations.exists(usuario, USUARIO);
+		return mongoOperations.find(usuario, Usuario.class, USUARIO).get(0).getRespuestasObtenidas();
 	}
 
 	@Override
-	public void actualizarUsuario(Respuesta respuesta, String idUsuario) {
+	public void actualizarRespuestasUsuario(Respuesta respuesta, String idUsuario) {
 		Query usuario = query(where("identificacion").is(idUsuario));
 		Usuario usuarioPorId = mongoOperations.find(usuario, Usuario.class, USUARIO).get(0);
 		List<Respuesta> respuestas = usuarioPorId.getRespuestasObtenidas();

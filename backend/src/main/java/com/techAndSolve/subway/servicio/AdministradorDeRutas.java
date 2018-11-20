@@ -2,6 +2,7 @@ package com.techAndSolve.subway.servicio;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +12,7 @@ import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.RutaGeneral;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
+import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
 import com.techAndSolve.subway.util.Dijkstra;
 
 public class AdministradorDeRutas {
@@ -20,6 +22,9 @@ public class AdministradorDeRutas {
 	
 	@Autowired
 	ConsultasYRespuestasDAO consultasYRespuestasDAO;
+	
+	@Autowired
+	UsuarioDAO usuarioDAO;
 	/*@Autowired
 	MongoOperations mongoOperations;
 	
@@ -65,13 +70,21 @@ public class AdministradorDeRutas {
 		Respuesta respuesta = new Respuesta(obtenerTiempo(consulta),
 				consulta, new ArrayList<>(obtenerRutaMasCercana(consulta)));
 		if(existeElUsuario(idUsuario)) {
-			consultasYRespuestasDAO.actualizarUsuario(respuesta, idUsuario);
+			consultasYRespuestasDAO.actualizarRespuestasUsuario(respuesta, idUsuario);
 		}else {
 			consultasYRespuestasDAO.crearUsuario(respuesta, idUsuario);
 		}	
 	}
 	
 	public boolean existeElUsuario(String idUsuario) {
-		return consultasYRespuestasDAO.existeElUsuario(idUsuario);
+		return usuarioDAO.existeElUsuario(idUsuario);
+	}
+	
+	public List<Respuesta> obtenerRespuestasEntregadasPorElUsuario(String idUsuario){
+		return consultasYRespuestasDAO.obtenerRespuestasPorUsuario(idUsuario);
+	}
+	
+	public int obtenerRolDelUsuario(String idUsuario) {
+		return usuarioDAO.obtenerRolDelUsuario(idUsuario);
 	}
 }

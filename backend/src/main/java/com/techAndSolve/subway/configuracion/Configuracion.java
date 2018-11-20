@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import com.mongodb.MongoClient;
 import com.techAndSolve.subway.persistencia.implementacion.ConsultasYRespuestasDAOImplementacion;
 import com.techAndSolve.subway.persistencia.implementacion.RutaGeneralDAOImplementacion;
+import com.techAndSolve.subway.persistencia.implementacion.UsuarioDAOImplementacion;
 import com.techAndSolve.subway.servicio.AdministradorDeRutas;
 
 @Configuration
@@ -26,6 +27,11 @@ public class Configuracion {
 	@Bean
 	public RutaGeneralDAOImplementacion crearRutaGeneralDAO(MongoOperations mongoOperations) {
 		return new RutaGeneralDAOImplementacion(mongoOperations);
+	}
+	
+	@Bean
+	public UsuarioDAOImplementacion crearUsuarioDAO(MongoOperations mongoOperations) {
+		return new UsuarioDAOImplementacion(mongoOperations);
 	}
 	
 	@Bean
