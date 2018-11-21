@@ -20,6 +20,7 @@ import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.RutaGeneral;
+import com.techAndSolve.subway.dominio.excepcion.SubwayException;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
@@ -94,10 +95,16 @@ public class AdministradorDeRutasTest {
 	 @Test
 	 public void obtenerRespuestasEntregadasPorElUsuarioTest() {
 		 when(consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234")).thenReturn(respuestas);
+		 when(usuarioDAO.existeElUsuario("1234")).thenReturn(true);
 		 assertEquals(2, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("1234").size());
 		 assertEquals(20, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("1234").get(0).getTiempo());
 		 assertEquals(18, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("1234").get(1).getTiempo());
-		 assertEquals(0, administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("12345").size());
+	 }
+	 
+	 @Test(expected = SubwayException.class)
+	 public void obtenerRespuestasEntregadasPorElUsuarioConUusarioNoEncontradoTest() {
+		 when(usuarioDAO.existeElUsuario("1234")).thenReturn(false);
+		 administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario("1234");
 	 }
 	 
 	 @Test
