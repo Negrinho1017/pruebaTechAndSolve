@@ -1,21 +1,17 @@
 package com.techAndSolve.subway.servicio;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.techAndSolve.subway.dominio.Consulta;
-import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.Respuesta;
-import com.techAndSolve.subway.dominio.RutaGeneral;
 import com.techAndSolve.subway.dominio.Usuario;
 import com.techAndSolve.subway.dominio.excepcion.SubwayException;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
-import com.techAndSolve.subway.util.Dijkstra;
 
 public class AdministradorDatosUsuario {
 	
