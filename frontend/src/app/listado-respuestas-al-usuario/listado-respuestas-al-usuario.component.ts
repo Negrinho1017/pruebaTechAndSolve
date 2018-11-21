@@ -10,7 +10,7 @@ import swal from 'sweetalert2'
 })
 export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   respuestas: Respuesta[];
-  idEvaluado: String;
+  idUsuario: String;
   estaciones: String[];
   usuarioEncontrado: boolean = false;
   constructor( private listadoRespuestasAlUsuarioService: ListadoRespuestasAlUsuarioService ) { }
@@ -20,7 +20,7 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   }
 
   mostrarTabla(){
-    this.listadoRespuestasAlUsuarioService.obtenerRespuestasEntregadasAlUsuario(this.idEvaluado)
+    this.listadoRespuestasAlUsuarioService.obtenerRespuestasEntregadasAlUsuario(this.idUsuario)
     .subscribe(res => {
       this.respuestas = res;
       this.usuarioEncontrado = true;

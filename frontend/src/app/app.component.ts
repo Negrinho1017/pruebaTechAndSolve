@@ -9,6 +9,7 @@ import { DatosGlobales } from './datosGlobales';
 export class AppComponent {
   title = 'frontend';
   mostrarBarra = this.datosGlobales.mostrarBarra;
+  usuarioActual = this.datosGlobales.usuarioActual;
 
   constructor(private datosGlobales: DatosGlobales) { }
 }

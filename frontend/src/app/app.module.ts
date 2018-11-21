@@ -8,12 +8,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { DatosGlobales } from './datosGlobales';
+import { ConsultasComponent } from './consultas/consultas.component';
+import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListadoRespuestasAlUsuarioComponent,
-    PaginaPrincipalComponent
+    PaginaPrincipalComponent,
+    ConsultasComponent,
+    PaginaInicialComponent
   ],
   imports: [
     BrowserModule,

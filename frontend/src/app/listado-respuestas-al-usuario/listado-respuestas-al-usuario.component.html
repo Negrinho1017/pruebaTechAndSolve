@@ -1,9 +1,10 @@
+<app-pagina-inicial></app-pagina-inicial>
 <body class="cuerpo">
   
   <form *ngIf="!usuarioEncontrado">
     <div class="form-group">
       <label for="identificacion">Ingrese el número de identificación</label>
-      <input type="text" class="form-control" id="identificacion" [(ngModel)] = "this.idEvaluado" [ngModelOptions]="{standalone: true}"
+      <input type="text" class="form-control" id="identificacion" [(ngModel)] = "this.idUsuario" [ngModelOptions]="{standalone: true}"
       placeholder="Identificación">
     </div>
     <button type="button" class="btn btn-dark" (click)="mostrarTabla()">Ingresar</button>

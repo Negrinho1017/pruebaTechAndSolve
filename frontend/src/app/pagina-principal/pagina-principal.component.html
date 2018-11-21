@@ -1,9 +1,10 @@
+<app-pagina-inicial></app-pagina-inicial>
 <body class="cuerpo">
   <form *ngIf="!usuarioEncontrado">
 
     <div class="form-group">
       <label for="usuario">Ingrese su usuario</label>
-      <input type="text" class="form-control" id="usuario" [(ngModel)]="this.usuario" [ngModelOptions]="{standalone: true}"
+      <input type="text" class="form-control" id="usuario" [(ngModel)]="this.nombreUsuario" [ngModelOptions]="{standalone: true}"
         placeholder="Usuario">
     </div>
 

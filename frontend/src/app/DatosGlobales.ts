@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
+import { Usuario } from "./model/Usuario";
 
 @Injectable()
 export class DatosGlobales {
-    idEvaluado: String;
     mostrarBarra: boolean;
+    usuarioActual: Usuario;
 }
