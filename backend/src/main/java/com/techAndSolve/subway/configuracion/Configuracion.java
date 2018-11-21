@@ -11,7 +11,8 @@ import com.mongodb.MongoClient;
 import com.techAndSolve.subway.persistencia.implementacion.ConsultasYRespuestasDAOImplementacion;
 import com.techAndSolve.subway.persistencia.implementacion.RutaGeneralDAOImplementacion;
 import com.techAndSolve.subway.persistencia.implementacion.UsuarioDAOImplementacion;
-import com.techAndSolve.subway.servicio.AdministradorDeRutas;
+import com.techAndSolve.subway.servicio.AdministradorDatosUsuario;
+import com.techAndSolve.subway.servicio.AdministradorRutas;
 
 @Configuration
 public class Configuracion {
@@ -51,7 +52,12 @@ public class Configuracion {
 	}
 	
 	@Bean
-	public AdministradorDeRutas crearAdministradorPruebas() {
-		return new AdministradorDeRutas();
+	public AdministradorDatosUsuario crearAdministradorDatosUusario() {
+		return new AdministradorDatosUsuario();
+	}
+	
+	@Bean
+	public AdministradorRutas crearAdministradorRutas() {
+		return new AdministradorRutas();
 	}
 }

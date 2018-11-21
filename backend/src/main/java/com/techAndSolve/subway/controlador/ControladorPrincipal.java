@@ -17,7 +17,8 @@ import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.Usuario;
-import com.techAndSolve.subway.servicio.AdministradorDeRutas;
+import com.techAndSolve.subway.servicio.AdministradorDatosUsuario;
+import com.techAndSolve.subway.servicio.AdministradorRutas;
 
 @CrossOrigin
 @RestController
@@ -26,13 +27,16 @@ public class ControladorPrincipal {
 
 	
 	@Autowired
-	AdministradorDeRutas administradorDeRutas;
+	AdministradorDatosUsuario administradorDatosUsuario;
+	
+	@Autowired
+	AdministradorRutas administradorRutas;
 	
 	@RequestMapping(value = "/ruta-mas-corta", method = RequestMethod.GET)
 	@ResponseBody
 	public LinkedList<Estacion> obtenerRutaMasCercana(@RequestParam int estacionOrigen,
 			@RequestParam int estacionDestino)  {
-		return administradorDeRutas.obtenerRutaMasCercana(new Consulta(
+		return administradorRutas.obtenerRutaMasCercana(new Consulta(
 				estacionOrigen, estacionDestino));
 	}
 	
@@ -40,26 +44,26 @@ public class ControladorPrincipal {
 	@ResponseBody
 	public int obtenerTiempo(@RequestParam int estacionOrigen,
 			@RequestParam int estacionDestino)  {
-		return administradorDeRutas.obtenerTiempo(new Consulta(
+		return administradorRutas.obtenerTiempo(new Consulta(
 				estacionOrigen, estacionDestino));
 	}
 	
 	@RequestMapping(value = "/respuestas-por-usuario", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Respuesta> obtenerRespuestasEntregadasAlUsuario(@RequestParam String idUsuario)  {
-		return administradorDeRutas.obtenerRespuestasEntregadasPorElUsuario(idUsuario);
+		return administradorDatosUsuario.obtenerRespuestasEntregadasPorElUsuario(idUsuario);
 	}
 	
 	@RequestMapping(value = "/rol-usuario", method = RequestMethod.GET)
 	@ResponseBody
 	public int rolDelUsuario(@RequestParam String idUsuario)  {
-		return administradorDeRutas.obtenerRolDelUsuario(idUsuario);
+		return administradorDatosUsuario.obtenerRolDelUsuario(idUsuario);
 	}
 	
 	@RequestMapping(value = "/ingreso-al-sistema", method = RequestMethod.GET)
 	@ResponseBody
 	public Usuario ingresarAlSistema(@RequestParam String idUsuario, @RequestParam String nombreUsuario)  {
-		return administradorDeRutas.hayInicioDeSesion(idUsuario, nombreUsuario);
+		return administradorDatosUsuario.hayInicioDeSesion(idUsuario, nombreUsuario);
 	}
 	
 	@RequestMapping(value = "/creacion-respuesta/{estacionOrigen}/{estacionDestino}", method = RequestMethod.POST)
@@ -67,7 +71,7 @@ public class ControladorPrincipal {
 	public void crearRespuesta(@RequestBody Usuario usuario,
 			@PathVariable(value = "estacionOrigen") int estacionOrigen,
 			@PathVariable(value = "estacionDestino") int estacionDestino) {
-		administradorDeRutas.crearRespuesta(usuario.getIdentificacion(),
+		administradorDatosUsuario.crearRespuesta(usuario.getIdentificacion(),
 				new Consulta(estacionOrigen, estacionDestino));
 	}
 }

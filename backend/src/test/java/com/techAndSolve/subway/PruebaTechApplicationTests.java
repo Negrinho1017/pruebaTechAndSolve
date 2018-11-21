@@ -14,7 +14,7 @@ import com.techAndSolve.subway.dominio.CaminoEntreEstaciones;
 import com.techAndSolve.subway.dominio.RutaGeneral;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.dominio.Estacion;
-import com.techAndSolve.subway.servicio.AdministradorDeRutas;
+import com.techAndSolve.subway.servicio.AdministradorDatosUsuario;
 import com.techAndSolve.subway.util.Dijkstra;
 
 @SpringBootTest(classes = SubwayApplication.class)
@@ -22,7 +22,7 @@ import com.techAndSolve.subway.util.Dijkstra;
 public class PruebaTechApplicationTests {
 	
 	@Autowired
-	AdministradorDeRutas administradorDeRutas;
+	AdministradorDatosUsuario administradorDeRutas;
 	
 	@Autowired
 	RutaGeneralDAO rutaGeneralDAO;

@@ -17,7 +17,7 @@ import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
 import com.techAndSolve.subway.util.Dijkstra;
 
-public class AdministradorDeRutas {
+public class AdministradorDatosUsuario {
 	
 	private static final String USUARIO_NO_ENCONTRADO = "Usuario no encontrado";
 
@@ -29,12 +29,15 @@ public class AdministradorDeRutas {
 	
 	@Autowired
 	UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	AdministradorRutas administradorRutas;
 	/*@Autowired
 	MongoOperations mongoOperations;
 	
 	private static final String RUTAS = "rutas";
 	
-	public AdministradorDeRutas(MongoOperations mongoOperations) {
+	public AdministradorRutas(MongoOperations mongoOperations) {
 		super();
 		this.mongoOperations = mongoOperations;
 	}
@@ -54,25 +57,9 @@ public class AdministradorDeRutas {
 		mongoOperations.save(graph, "rutaGeneral");
 	}*/
 	
-	public LinkedList<Estacion> obtenerRutaMasCercana(Consulta consulta){
-		RutaGeneral rutaGeneral = rutaGeneralDAO.obtenerRutaGeneral();
-		Dijkstra dijkstra = new Dijkstra(rutaGeneral);
-        dijkstra.execute(rutaGeneral.getVertexes().get(consulta.getEstacionOrigen()-1));
-        return dijkstra.getPath(rutaGeneral.getVertexes().get(
-        		consulta.getEstacionDestino()-1));
-	}
-	
-	public int obtenerTiempo(Consulta consulta){
-		RutaGeneral rutaGeneral = rutaGeneralDAO.obtenerRutaGeneral();
-		Dijkstra dijkstra = new Dijkstra(rutaGeneral);
-        dijkstra.execute(rutaGeneral.getVertexes().get(consulta.getEstacionOrigen()-1));
-        return dijkstra.getShortestDistance(rutaGeneral.getVertexes().get(
-        		consulta.getEstacionDestino()-1));
-	}
-	
 	public void crearRespuesta(String idUsuario, Consulta consulta) {
-		Respuesta respuesta = new Respuesta(obtenerTiempo(consulta),
-				consulta, new ArrayList<>(obtenerRutaMasCercana(consulta)));
+		Respuesta respuesta = new Respuesta(administradorRutas.obtenerTiempo(consulta),
+				consulta, new ArrayList<>(administradorRutas.obtenerRutaMasCercana(consulta)));
 		if(existeElUsuario(idUsuario)) {
 			consultasYRespuestasDAO.actualizarRespuestasUsuario(respuesta, idUsuario);
 		}else {
