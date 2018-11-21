@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Respuesta } from '../model/Respuesta';
 import { ListadoRespuestasAlUsuarioService } from './listado-respuestas-al-usuario.service';
 import swal from 'sweetalert2'
+import { Estacion } from '../model/Estacion';
 
 @Component({
   selector: 'app-listado-respuestas-al-usuario',
@@ -11,7 +12,7 @@ import swal from 'sweetalert2'
 export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   respuestas: Respuesta[];
   idUsuario: String;
-  estaciones: String[];
+  estaciones: String[][];
   usuarioEncontrado: boolean = false;
   constructor( private listadoRespuestasAlUsuarioService: ListadoRespuestasAlUsuarioService ) { }
 
@@ -24,6 +25,10 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
     .subscribe(res => {
       this.respuestas = res;
       this.usuarioEncontrado = true;
+      if(this.respuestas != null){
+        this.estaciones = this.respuestas.map(respuesta => respuesta.estaciones
+        .map(estacion => estacion.name));
+      }
     }, error => {
       this.mensajeError(error.error.mensaje);
     });
