@@ -56,6 +56,12 @@ public class ControladorPrincipal {
 		return administradorDeRutas.obtenerRolDelUsuario(idUsuario);
 	}
 	
+	@RequestMapping(value = "/ingreso-al-sistema", method = RequestMethod.GET)
+	@ResponseBody
+	public Usuario ingresarAlSistema(@RequestParam String idUsuario, @RequestParam String nombreUsuario)  {
+		return administradorDeRutas.hayInicioDeSesion(idUsuario, nombreUsuario);
+	}
+	
 	@RequestMapping(value = "/creacion-respuesta/{estacionOrigen}/{estacionDestino}", method = RequestMethod.POST)
 	@ResponseBody
 	public void crearRespuesta(@RequestBody Usuario usuario,

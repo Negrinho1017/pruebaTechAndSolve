@@ -6,21 +6,23 @@ import { AppRoutingModule } from './/app-routing.module';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
+import { DatosGlobales } from './datosGlobales';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListadoRespuestasAlUsuarioComponent
+    ListadoRespuestasAlUsuarioComponent,
+    PaginaPrincipalComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule,
-    
+    HttpModule
   ],
-  providers: [],
+  providers: [DatosGlobales],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

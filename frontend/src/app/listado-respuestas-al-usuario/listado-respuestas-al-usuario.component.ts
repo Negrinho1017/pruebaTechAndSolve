@@ -11,10 +11,12 @@ import swal from 'sweetalert2'
 export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   respuestas: Respuesta[];
   idEvaluado: String;
+  estaciones: String[];
   usuarioEncontrado: boolean = false;
   constructor( private listadoRespuestasAlUsuarioService: ListadoRespuestasAlUsuarioService ) { }
 
   ngOnInit() {
+    this.estaciones = [];
   }
 
   mostrarTabla(){
@@ -26,7 +28,6 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
       this.mensajeError(error.error.mensaje);
     });
   }
-
 
   mensajeError(mensaje: String){
     swal({

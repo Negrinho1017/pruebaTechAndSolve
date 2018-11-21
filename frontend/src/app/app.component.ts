@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DatosGlobales } from './datosGlobales';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  mostrarBarra = this.datosGlobales.mostrarBarra;
+
+  constructor(private datosGlobales: DatosGlobales) { }
 }

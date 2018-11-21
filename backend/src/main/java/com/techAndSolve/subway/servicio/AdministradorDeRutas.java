@@ -10,6 +10,7 @@ import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.RutaGeneral;
+import com.techAndSolve.subway.dominio.Usuario;
 import com.techAndSolve.subway.dominio.excepcion.SubwayException;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
@@ -75,12 +76,26 @@ public class AdministradorDeRutas {
 		if(existeElUsuario(idUsuario)) {
 			consultasYRespuestasDAO.actualizarRespuestasUsuario(respuesta, idUsuario);
 		}else {
-			consultasYRespuestasDAO.crearUsuario(respuesta, idUsuario);
+			consultasYRespuestasDAO.crearRespuesta(respuesta, idUsuario);
 		}	
 	}
 	
 	public boolean existeElUsuario(String idUsuario) {
 		return usuarioDAO.existeElUsuario(idUsuario);
+	}
+	
+	public boolean datosIngresadosCorrectamente(String idUsuario, String nombreUsuario) {
+		return usuarioDAO.datosIngresadosCorrectamente(idUsuario, nombreUsuario);
+	}
+	
+	public Usuario hayInicioDeSesion(String idUsuario, String nombreUsuario) {
+		if(existeElUsuario(idUsuario) && !datosIngresadosCorrectamente(idUsuario, nombreUsuario)) {
+			throw new SubwayException("Datos ingresados incorrectamente");
+		}
+		if(!existeElUsuario(idUsuario)){
+			usuarioDAO.crearUsuario(idUsuario, nombreUsuario);	
+		}
+		return usuarioDAO.obtenerUsuarioPorId(idUsuario);
 	}
 	
 	public List<Respuesta> obtenerRespuestasEntregadasPorElUsuario(String idUsuario){

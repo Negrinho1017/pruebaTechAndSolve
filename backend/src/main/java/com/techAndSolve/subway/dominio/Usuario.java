@@ -16,6 +16,12 @@ public class Usuario {
 		this.identificacion = identificacion;
 		this.nombreUsuario = nombreUsuario;
 	}
+	
+	public Usuario(String identificacion, String nombreUsuario, int rol) {
+		this.identificacion = identificacion;
+		this.nombreUsuario = nombreUsuario;
+		this.rol = rol;
+	}
 
 	public int getRol() {
 		return rol;

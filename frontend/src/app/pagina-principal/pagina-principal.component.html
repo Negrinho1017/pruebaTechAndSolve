@@ -1,0 +1,18 @@
+<body class="cuerpo">
+  <form *ngIf="!usuarioEncontrado">
+
+    <div class="form-group">
+      <label for="usuario">Ingrese su usuario</label>
+      <input type="text" class="form-control" id="usuario" [(ngModel)]="this.usuario" [ngModelOptions]="{standalone: true}"
+        placeholder="Usuario">
+    </div>
+
+    <div class="form-group">
+      <label for="identificacion">Ingrese su identificación</label>
+      <input type="text" class="form-control" id="identificacion" [(ngModel)]="this.identificacion" [ngModelOptions]="{standalone: true}"
+        placeholder="Identificación">
+    </div>
+
+    <button type="button" class="btn btn-dark" (click)="ingresarAlSistema()">Ingresar</button>
+  </form>
+</body>

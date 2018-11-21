@@ -29,7 +29,7 @@ public class ConsultasYRespuestasDAOImplementacion implements ConsultasYRespuest
 	}
 	
 	@Override
-	public void crearUsuario(Respuesta respuesta, String idUsuario) {
+	public void crearRespuesta(Respuesta respuesta, String idUsuario) {
 		List<Respuesta> respuestas = new ArrayList<>();
 		respuestas.add(respuesta);
 		Usuario usuario = new Usuario(Roles.USUARIO_CORRIENTE.getValue(),
