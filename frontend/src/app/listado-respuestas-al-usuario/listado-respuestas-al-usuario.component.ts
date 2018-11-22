@@ -3,6 +3,7 @@ import { Respuesta } from '../model/Respuesta';
 import { ListadoRespuestasAlUsuarioService } from './listado-respuestas-al-usuario.service';
 import swal from 'sweetalert2'
 import { Estacion } from '../model/Estacion';
+import { DatosGlobales } from '../datosGlobales';
 
 @Component({
   selector: 'app-listado-respuestas-al-usuario',
@@ -14,7 +15,8 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   idUsuario: String;
   estaciones: String[][];
   usuarioEncontrado: boolean = false;
-  constructor( private listadoRespuestasAlUsuarioService: ListadoRespuestasAlUsuarioService ) { }
+  constructor( private listadoRespuestasAlUsuarioService: ListadoRespuestasAlUsuarioService,
+    private datosGlobales: DatosGlobales ) { }
 
   ngOnInit() {
     this.estaciones = [];
