@@ -1,0 +1,89 @@
+package com.techAndSolve.subway.util;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.techAndSolve.subway.dominio.Estacion;
+import com.techAndSolve.subway.dominio.Rutas;
+import com.techAndSolve.subway.dominio.SubRuta;
+
+public class VerificadorRutas {
+	public static List<SubRuta> devolverRutasASeguir(List<Estacion> estaciones, Rutas rutas){
+		List<String> idsEstacion = new ArrayList<>();
+		for(Estacion estacion : estaciones) {
+			idsEstacion.add(estacion.getId());
+		}
+		List<Integer> numerosEstacion = ListUtil.convertirListaStringAEntero(idsEstacion);
+		List<SubRuta> subRutas = new ArrayList<>();
+		return verificarMejorRuta(numerosEstacion, rutas, subRutas);
+	}
+	
+	public static List<SubRuta> verificarMejorRuta(List<Integer> numerosEstacion, Rutas rutas,
+			List<SubRuta> subRutas ) {
+		List<Integer> estaciones = calcularEstacionesCubiertas(numerosEstacion, rutas);
+		SubRuta subRuta = new SubRuta("",estaciones.get(0), estaciones.get(estaciones.size()-1));
+		subRutas.add(subRuta);
+		ListUtil.eliminarSubLista(numerosEstacion, estaciones);
+		return (numerosEstacion.size()!=0) ? verificarMejorRuta(numerosEstacion, rutas, subRutas) : subRutas;
+	}
+
+	public static List<Integer> calcularEstacionesCubiertas(List<Integer> numerosEstacion, Rutas rutas) {
+		int estacionesCubiertas = 0;
+		List<Integer> estaciones = new ArrayList<>();
+		if(calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaA()).size() > estacionesCubiertas) {
+			estacionesCubiertas = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaA()).size();
+			estaciones = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaA());
+		}
+		if(calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaB()).size() > estacionesCubiertas) {
+			estacionesCubiertas = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaB()).size();
+			estaciones = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaB());
+		}
+		if(calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaC()).size() > estacionesCubiertas) {
+			estacionesCubiertas = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaC()).size();
+			estaciones = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaC());
+		}
+		if(calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaD()).size() > estacionesCubiertas) {
+			estacionesCubiertas = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaD()).size();
+			estaciones = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaD());
+		}
+		if(calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaE()).size() > estacionesCubiertas) {
+			estacionesCubiertas = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaE()).size();
+			estaciones = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaE());
+		}
+		if(calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaF()).size() > estacionesCubiertas) {
+			estacionesCubiertas = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaF()).size();
+			estaciones = calculadorEstacionesCubiertas(numerosEstacion, rutas.getRutaF());
+		}
+		return estaciones;
+	}
+	
+	public static List<Integer> calculadorEstacionesCubiertas(List<Integer> numerosEstacion, List<Integer> ruta) {
+		List<Integer> estaciones = new ArrayList<>(numerosEstacion);
+		boolean estaEnLaMismaRuta = false;
+		int posicionFinal = estaciones.size()-1;
+		while(!estaEnLaMismaRuta) {
+			if(Collections.indexOfSubList(ruta , estaciones) != -1) {
+				estaEnLaMismaRuta = true;
+			}else {
+				estaciones.remove(posicionFinal);
+				posicionFinal--;
+			}
+		}
+		if(estaciones.size()==1) {
+			Collections.reverse(ruta);
+			estaEnLaMismaRuta = false;
+			estaciones = new ArrayList<>(numerosEstacion);
+			posicionFinal = estaciones.size()-1;
+			while(!estaEnLaMismaRuta) {		
+				if(Collections.indexOfSubList(ruta , estaciones) != -1) {
+					estaEnLaMismaRuta = true;
+				}else {
+					estaciones.remove(posicionFinal);
+					posicionFinal--;
+				}
+			}
+		}
+		return estaciones;
+	}
+}
