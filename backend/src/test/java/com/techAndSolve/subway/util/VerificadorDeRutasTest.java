@@ -45,6 +45,7 @@ public class VerificadorDeRutasTest {
 		rutaB.add(6);
 		rutaB.add(4);
 		rutaB.add(8);
+		rutaB.add(14);
 		rutaB.add(9);
 		numerosEstacion.add(6);
 		numerosEstacion.add(4);
@@ -58,7 +59,7 @@ public class VerificadorDeRutasTest {
 	@Test
 	public void calculadorEstacionesCubiertasTest() {	
 		List<Integer> listaFinal = VerificadorRutas.calculadorEstacionesCubiertas(numerosEstacion, rutaB);
-		assertEquals(3, listaFinal.size());
+		assertEquals(4, listaFinal.size());
 		assertEquals(6, Integer.parseInt(listaFinal.get(0).toString()));
 		assertEquals(4, Integer.parseInt(listaFinal.get(1).toString()));
 		assertEquals(8, Integer.parseInt(listaFinal.get(2).toString()));
@@ -67,7 +68,7 @@ public class VerificadorDeRutasTest {
 	@Test
 	public void calcularEstacionesCubiertasTest() {	
 		List<Integer> listaFinal = VerificadorRutas.calcularEstacionesCubiertas(numerosEstacion, rutas);
-		assertEquals(3, listaFinal.size());
+		assertEquals(4, listaFinal.size());
 		assertEquals(6, Integer.parseInt(listaFinal.get(0).toString()));
 		assertEquals(4, Integer.parseInt(listaFinal.get(1).toString()));
 		assertEquals(8, Integer.parseInt(listaFinal.get(2).toString()));
@@ -95,7 +96,7 @@ public class VerificadorDeRutasTest {
 		List<SubRuta> subRutasTotales = VerificadorRutas.verificarMejorRuta(numerosEstacion, rutas, subRutas);
 		assertEquals(2,subRutasTotales.size());
 		assertEquals(6,subRutasTotales.get(0).getEstacionOrigen());
-		assertEquals(8,subRutasTotales.get(0).getEstacionDestino());
+		assertEquals(14,subRutasTotales.get(0).getEstacionDestino());
 		assertEquals(14,subRutasTotales.get(1).getEstacionOrigen());
 		assertEquals(15,subRutasTotales.get(1).getEstacionDestino());
 	}
@@ -115,27 +116,43 @@ public class VerificadorDeRutasTest {
 		List<SubRuta> subRutasTotales = VerificadorRutas.devolverRutasASeguir(estaciones, rutas);
 		assertEquals(2,subRutasTotales.size());
 		assertEquals(6,subRutasTotales.get(0).getEstacionOrigen());
-		assertEquals(8,subRutasTotales.get(0).getEstacionDestino());
+		assertEquals(14,subRutasTotales.get(0).getEstacionDestino());
 		assertEquals(14,subRutasTotales.get(1).getEstacionOrigen());
 		assertEquals(15,subRutasTotales.get(1).getEstacionDestino());
 	}
 	
 	@Test
-	public void devolverRutasASeguirOrde() {	
+	public void devolverRutasASeguirOrden() {	
+		List<Integer> rutaA = new ArrayList<>();
+		List<Integer> rutaB = new ArrayList<>();
+		rutaA.add(6);
+		rutaA.add(5);
+		rutaA.add(4);
+		rutaA.add(7);
+		rutaA.add(8);
+		rutaA.add(9);
+		rutaA.add(14);
+		rutaA.add(15);
+		rutaB.add(6);
+		rutaB.add(4);
+		rutaB.add(8);
+		rutaB.add(15);
+		rutaB.add(9);
+		Rutas rutas = new Rutas(rutaA, rutaB, rutaC, rutaD, rutaE, rutaF);
 		Estacion estacion6 = new Estacion("6","6");
 		Estacion estacion4 = new Estacion("4","4");
 		Estacion estacion8 = new Estacion("8","8");
-		Estacion estacion14 = new Estacion("15","15");
-		Estacion estacion15 = new Estacion("14","14");
+		Estacion estacion15 = new Estacion("15","15");
+		Estacion estacion14 = new Estacion("14","14");
 		estaciones.add(estacion6);
 		estaciones.add(estacion4);
 		estaciones.add(estacion8);
-		estaciones.add(estacion14);
 		estaciones.add(estacion15);
+		estaciones.add(estacion14);
 		List<SubRuta> subRutasTotales = VerificadorRutas.devolverRutasASeguir(estaciones, rutas);
 		assertEquals(2,subRutasTotales.size());
 		assertEquals(6,subRutasTotales.get(0).getEstacionOrigen());
-		assertEquals(8,subRutasTotales.get(0).getEstacionDestino());
+		assertEquals(15,subRutasTotales.get(0).getEstacionDestino());
 		assertEquals(15,subRutasTotales.get(1).getEstacionOrigen());
 		assertEquals(14,subRutasTotales.get(1).getEstacionDestino());
 	}

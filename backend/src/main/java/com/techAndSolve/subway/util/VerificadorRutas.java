@@ -25,6 +25,9 @@ public class VerificadorRutas {
 		SubRuta subRuta = new SubRuta("",estaciones.get(0), estaciones.get(estaciones.size()-1));
 		subRutas.add(subRuta);
 		ListUtil.eliminarSubLista(numerosEstacion, estaciones);
+		if(numerosEstacion.size()>0) {
+			numerosEstacion.add(0, subRuta.getEstacionDestino());
+		}
 		return (numerosEstacion.size()!=0) ? verificarMejorRuta(numerosEstacion, rutas, subRutas) : subRutas;
 	}
 
