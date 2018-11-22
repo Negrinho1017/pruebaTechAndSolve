@@ -3,12 +3,16 @@ package com.techAndSolve.subway.persistencia.implementacion;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.techAndSolve.subway.dominio.Usuario;
 import com.techAndSolve.subway.dominio.constantes.Roles;
+import com.techAndSolve.subway.persistencia.builder.UsuarioBuilder;
+import com.techAndSolve.subway.persistencia.entidad.UsuarioEntidad;
 import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
 
 public class UsuarioDAOImplementacion implements UsuarioDAO {
@@ -31,7 +35,7 @@ public class UsuarioDAOImplementacion implements UsuarioDAO {
 	@Override
 	public int obtenerRolDelUsuario(String idUsuario) {
 		Query usuario = query(where("identificacion").is(idUsuario));
-		return mongoOperations.find(usuario, Usuario.class, USUARIO).get(0).getRol();
+		return mongoOperations.find(usuario, UsuarioEntidad.class, USUARIO).get(0).getRol();
 	}
 
 	@Override
@@ -44,14 +48,13 @@ public class UsuarioDAOImplementacion implements UsuarioDAO {
 	@Override
 	public Usuario obtenerUsuarioPorId(String idUsuario) {
 		Query usuario = query(where("identificacion").is(idUsuario));
-		return mongoOperations.find(usuario, Usuario.class, USUARIO).get(0);
+		UsuarioEntidad usuarioEntidad = mongoOperations.find(usuario, UsuarioEntidad.class, USUARIO).get(0);
+		return UsuarioBuilder.convertirDeEntidadADominio(usuarioEntidad);
 	}
 
 	@Override
 	public void crearUsuario(String idUsuario, String nombreUsuario) {
-		Usuario usuario = new Usuario(idUsuario, nombreUsuario, Roles.USUARIO_CORRIENTE.getValue());
-		mongoOperations.save(usuario, USUARIO);		
+		Usuario usuario = new Usuario(Roles.USUARIO_CORRIENTE.getValue(), new ArrayList<>(), idUsuario, nombreUsuario);
+		mongoOperations.save(UsuarioBuilder.convertirDeDominioAEntidad(usuario), USUARIO);		
 	}
-	
-	
 }
