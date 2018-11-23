@@ -48,15 +48,9 @@ public class ControladorConsultas {
 		int tiempo = administradorRutas.obtenerTiempo(new Consulta(
 				estacionOrigen, estacionDestino));;
 		LinkedList<Estacion> rutaMasCorta = administradorRutas.obtenerRutaMasCercana(new Consulta(
-				estacionOrigen, estacionDestino));;
-		return new DatosUsuario(tiempo, rutaMasCorta);
-	}
-	
-	@RequestMapping(value = "/rutas", method = RequestMethod.GET)
-	@ResponseBody
-	public List<SubRuta> obtenerRutasASeguir(@RequestParam int estacionOrigen,
-			@RequestParam int estacionDestino)  {
-		return administradorRutas.obtenerListadoDeRutasASeguir(
-				new Consulta(estacionOrigen, estacionDestino));
+				estacionOrigen, estacionDestino));
+		List<SubRuta> subRutas = administradorRutas.obtenerListadoDeRutasASeguir(new Consulta(
+				estacionOrigen, estacionDestino));
+		return new DatosUsuario(tiempo, rutaMasCorta, subRutas);
 	}
 }

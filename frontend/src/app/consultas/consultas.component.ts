@@ -4,6 +4,7 @@ import { DatosUsuario } from '../model/DatosUsuario';
 import swal from 'sweetalert2';
 import { DatosGlobales } from '../datosGlobales';
 import { Usuario } from '../model/Usuario';
+import { SubRuta } from '../model/SubRuta';
 
 @Component({
   selector: 'app-consultas',
@@ -27,13 +28,24 @@ export class ConsultasComponent implements OnInit {
     this.consultasService.obtenerDatosUsuario(this.estacionOrigenSeleccionada, this.estacionDestinoSeleccionada)
       .subscribe(res => {
         this.datosUsuario = res;
-        this.mensajeExito("La ruta más corta es: " +
-          this.datosUsuario.rutaMasCorta.map(estacion => estacion.name) +
-          " y el tiempo estimado es: " + this.datosUsuario.tiempo);       
+        var mensaje = "La ruta más corta es: " +
+        this.datosUsuario.rutaMasCorta.map(estacion => estacion.name) +
+        " y el tiempo estimado es: " + this.datosUsuario.tiempo + " minutos";
+        var rutas = this.rutasASeguir(this.datosUsuario.subRutas);
+        this.mensajeRutas(mensaje, rutas); 
       }, error => {
         this.mensajeError(error.error.mensaje);
       });
       this.crearRespuesta();
+  }
+
+  rutasASeguir(listaSubRutas: SubRuta[]): String {
+    var mensaje = "";
+    for (let subRuta of listaSubRutas) {
+      mensaje = mensaje + "Ruta "+subRuta.nombre + ": Estación origen - " + subRuta.estacionOrigen+ " Estación destino - "
+      +subRuta.estacionDestino+ ".<br/>";
+    } 
+    return mensaje;
   }
 
   crearRespuesta() {
@@ -60,6 +72,21 @@ export class ConsultasComponent implements OnInit {
       type: 'success',
       title: 'Bienvenido!!',
       text: <string>mensaje
+    })
+  }
+
+  mensajeRutas(mensaje: String, rutas: String){
+    swal({
+      title: 'Bienvenido!!',
+      text: <string> mensaje,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Mostrar rutas',
+      cancelButtonText: 'Salir'
+    }).then((result) => {
+      if (result.value) {
+        swal(<string> rutas)
+      }
     })
   }
 
