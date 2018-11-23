@@ -26,6 +26,7 @@ export class PaginaPrincipalComponent implements OnInit {
     .subscribe( res => {
       this.datosGlobales.usuarioActual = res;
       this.datosGlobales.mostrarBarra = true;
+      localStorage.setItem('idUsuario', <string> this.datosGlobales.usuarioActual.identificacion)
       this.router.navigate(['pagina-inicial']);
       this.loading = false;
     }, error => {

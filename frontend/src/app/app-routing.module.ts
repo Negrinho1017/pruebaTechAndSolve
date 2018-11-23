@@ -5,11 +5,12 @@ import { ListadoRespuestasAlUsuarioComponent } from './listado-respuestas-al-usu
 import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.component';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
+import { AuthGuard } from './AuthGuard';
 
 const routes: Routes = [
-  { path: 'respuestas-usuario', component: ListadoRespuestasAlUsuarioComponent },
-  { path: 'consultas', component: ConsultasComponent },
-  { path: 'pagina-inicial', component: PaginaInicialComponent },
+  { path: 'respuestas-usuario', component: ListadoRespuestasAlUsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'consultas', component: ConsultasComponent, canActivate: [AuthGuard] },
+  { path: 'pagina-inicial', component: PaginaInicialComponent, canActivate: [AuthGuard] },
   { path: '', component: PaginaPrincipalComponent }
 ]
 @NgModule({

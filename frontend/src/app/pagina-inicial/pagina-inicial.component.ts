@@ -17,6 +17,7 @@ export class PaginaInicialComponent implements OnInit {
   }
 
   salir(){
+    localStorage.removeItem('idUsuario');
     this.datosGlobales.usuarioActual = undefined;
     this.datosGlobales.mostrarBarra = false;
   }

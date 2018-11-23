@@ -11,6 +11,7 @@ import { DatosGlobales } from './datosGlobales';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { AuthGuard } from './AuthGuard';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     HttpModule,
     NgxLoadingModule
   ],
-  providers: [DatosGlobales],
+  providers: [DatosGlobales, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
