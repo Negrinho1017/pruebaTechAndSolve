@@ -1,4 +1,5 @@
 <app-pagina-inicial></app-pagina-inicial>
+<body class="cuerpo">
 Estación origen: <select [(ngModel)]="estacionOrigenSeleccionada">
     <option *ngFor="let item of listaEstaciones" [ngValue]="item" ngDefaultControl>{{item}}</option>
 </select>
@@ -6,5 +7,8 @@ Estación destino: <select  [(ngModel)]="estacionDestinoSeleccionada">
         <option *ngFor="let item of listaEstaciones" [ngValue]="item" ngDefaultControl>{{item}}</option>
 </select>
 <br><br>
-<input type="button" class="btn btn-dark" value="Buscar ruta" (click)="buscar()">
+<input type="button" class="btn btn-dark" value="Buscar ruta" (click)="buscar()"><br><br>
+<h2>Mapa: </h2>
+<img src="src/assets/mapa.PNG">
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>
+</body>
