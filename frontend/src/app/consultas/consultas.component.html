@@ -1,14 +1,18 @@
 <app-pagina-inicial></app-pagina-inicial>
+
 <body class="cuerpo">
-Estación origen: <select [(ngModel)]="estacionOrigenSeleccionada">
-    <option *ngFor="let item of listaEstaciones" [ngValue]="item" ngDefaultControl>{{item}}</option>
-</select>
-Estación destino: <select  [(ngModel)]="estacionDestinoSeleccionada">
+    Estación origen: <select [(ngModel)]="estacionOrigenSeleccionada">
         <option *ngFor="let item of listaEstaciones" [ngValue]="item" ngDefaultControl>{{item}}</option>
-</select>
-<br><br>
-<input type="button" class="btn btn-dark" value="Buscar ruta" (click)="buscar()"><br><br>
-<h2>Mapa: </h2>
-<img src="src/assets/mapa.PNG">
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>
+    </select>
+    Estación destino: <select [(ngModel)]="estacionDestinoSeleccionada">
+        <option *ngFor="let item of listaEstaciones" [ngValue]="item" ngDefaultControl>{{item}}</option>
+    </select>
+    <br><br>
+    <input type="button" class="btn btn-dark" value="Buscar ruta" (click)="buscar()"><br><br>
+    <h2>Mapa: </h2>
+    <h4>Color de las rutas: <br><font color="red"><b>A</b></font>, <font color="orange"><b>B</b></font>, 
+        <font color="green"><b>C</b></font>, <font color="yellow"><b>D</b></font>, <font color="blue"><b>E</b></font>, 
+        <font color="black"><b>F</b></font></h4>
+    <img src="src/assets/mapa.PNG">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>
 </body>
