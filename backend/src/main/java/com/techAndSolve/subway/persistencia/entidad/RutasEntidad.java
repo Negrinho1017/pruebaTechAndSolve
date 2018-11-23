@@ -3,13 +3,14 @@ package com.techAndSolve.subway.persistencia.entidad;
 import java.util.List;
 
 public class RutasEntidad {
-	List<Integer> RutaA;
-	List<Integer> RutaB;
-	List<Integer> RutaC;
-	List<Integer> RutaD;
-	List<Integer> RutaE;
-	List<Integer> RutaF;
+	private List<Integer> RutaA;
+	private List<Integer> RutaB;
+	private List<Integer> RutaC;
+	private List<Integer> RutaD;
+	private List<Integer> RutaE;
+	private List<Integer> RutaF;
 	
+	public RutasEntidad() {}
 	public RutasEntidad(List<Integer> rutaA, List<Integer> rutaB, List<Integer> rutaC, List<Integer> rutaD,
 			List<Integer> rutaE, List<Integer> rutaF) {
 		super();

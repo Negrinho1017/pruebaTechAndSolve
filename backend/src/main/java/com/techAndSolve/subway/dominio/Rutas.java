@@ -3,12 +3,12 @@ package com.techAndSolve.subway.dominio;
 import java.util.List;
 
 public class Rutas {
-	List<Integer> RutaA;
-	List<Integer> RutaB;
-	List<Integer> RutaC;
-	List<Integer> RutaD;
-	List<Integer> RutaE;
-	List<Integer> RutaF;
+	private List<Integer> RutaA;
+	private List<Integer> RutaB;
+	private List<Integer> RutaC;
+	private List<Integer> RutaD;
+	private List<Integer> RutaE;
+	private List<Integer> RutaF;
 	
 	public Rutas() {}
 	public Rutas(List<Integer> rutaA, List<Integer> rutaB, List<Integer> rutaC, List<Integer> rutaD,
