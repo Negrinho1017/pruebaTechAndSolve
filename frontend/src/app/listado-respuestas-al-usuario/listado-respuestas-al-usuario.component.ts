@@ -15,6 +15,7 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   idUsuario: String;
   estaciones: String[][];
   usuarioEncontrado: boolean = false;
+  loading: boolean;
   constructor( private listadoRespuestasAlUsuarioService: ListadoRespuestasAlUsuarioService,
     private datosGlobales: DatosGlobales ) { }
 
@@ -23,6 +24,7 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
   }
 
   mostrarTabla(){
+    this.loading = true;
     this.listadoRespuestasAlUsuarioService.obtenerRespuestasEntregadasAlUsuario(this.idUsuario)
     .subscribe(res => {
       this.respuestas = res;
@@ -30,9 +32,11 @@ export class ListadoRespuestasAlUsuarioComponent implements OnInit {
       if(this.respuestas != null){
         this.estaciones = this.respuestas.map(respuesta => respuesta.estaciones
         .map(estacion => estacion.name));
+        this.loading = false;
       }
     }, error => {
       this.mensajeError(error.error.mensaje);
+      this.loading = false;
     });
   }
 

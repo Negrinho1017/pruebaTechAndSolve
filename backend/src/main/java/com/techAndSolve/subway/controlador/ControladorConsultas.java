@@ -45,12 +45,7 @@ public class ControladorConsultas {
 	@ResponseBody
 	public DatosUsuario obtenerDatosUsuario(@RequestParam int estacionOrigen,
 			@RequestParam int estacionDestino)  {
-		int tiempo = administradorRutas.obtenerTiempo(new Consulta(
-				estacionOrigen, estacionDestino));;
-		LinkedList<Estacion> rutaMasCorta = administradorRutas.obtenerRutaMasCercana(new Consulta(
-				estacionOrigen, estacionDestino));
-		List<SubRuta> subRutas = administradorRutas.obtenerListadoDeRutasASeguir(new Consulta(
-				estacionOrigen, estacionDestino));
-		return new DatosUsuario(tiempo, rutaMasCorta, subRutas);
+		return administradorRutas.obtenerDatosRequeridosPorElUsuario(
+				new Consulta(estacionOrigen, estacionDestino));
 	}
 }

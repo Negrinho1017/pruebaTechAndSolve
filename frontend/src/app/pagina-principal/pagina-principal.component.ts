@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class PaginaPrincipalComponent implements OnInit {
   nombreUsuario: String;
   identificacion: String;
+  loading: boolean;
   constructor( private datosGlobales: DatosGlobales, 
   private paginaPrincipalService: PaginaPrincipalService, private router: Router ) { }
 
@@ -20,13 +21,16 @@ export class PaginaPrincipalComponent implements OnInit {
   }
 
   ingresarAlSistema(){
+    this.loading = true;
     this.paginaPrincipalService.ingresarAlSistema(this.identificacion, this.nombreUsuario)
     .subscribe( res => {
       this.datosGlobales.usuarioActual = res;
       this.datosGlobales.mostrarBarra = true;
       this.router.navigate(['pagina-inicial']);
+      this.loading = false;
     }, error => {
       this.mensajeError(error.error.mensaje);
+      this.loading = false;
     });
   }
 

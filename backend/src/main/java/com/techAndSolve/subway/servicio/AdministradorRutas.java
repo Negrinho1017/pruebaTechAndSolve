@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.techAndSolve.subway.dominio.Consulta;
+import com.techAndSolve.subway.dominio.DatosUsuario;
 import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.RutaGeneral;
 import com.techAndSolve.subway.dominio.Rutas;
 import com.techAndSolve.subway.dominio.SubRuta;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutasDAO;
+import com.techAndSolve.subway.util.CalculadoraAritmetica;
 import com.techAndSolve.subway.util.Dijkstra;
 import com.techAndSolve.subway.util.VerificadorRutas;
 
@@ -43,5 +45,12 @@ public class AdministradorRutas {
 		List<Estacion> estaciones = obtenerRutaMasCercana(consulta);
 		Rutas rutas = rutasDAO.obtenerRutas();
 		return VerificadorRutas.devolverRutasASeguir(estaciones, rutas);
+	}
+	
+	public DatosUsuario obtenerDatosRequeridosPorElUsuario(Consulta consulta) {
+		LinkedList<Estacion> rutaMasCorta = obtenerRutaMasCercana(consulta);
+		List<SubRuta> subRutas = obtenerListadoDeRutasASeguir(consulta);
+		int tiempo =  CalculadoraAritmetica.calcularTiempoTotalParaUnaRuta(subRutas, obtenerTiempo(consulta));
+		return new DatosUsuario(tiempo, rutaMasCorta, subRutas);
 	}
 }

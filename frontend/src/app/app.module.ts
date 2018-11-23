@@ -10,6 +10,7 @@ import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.co
 import { DatosGlobales } from './datosGlobales';
 import { ConsultasComponent } from './consultas/consultas.component';
 import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.componen
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    NgxLoadingModule
   ],
   providers: [DatosGlobales],
   bootstrap: [AppComponent]

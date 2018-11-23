@@ -12,6 +12,7 @@ import com.techAndSolve.subway.dominio.excepcion.SubwayException;
 import com.techAndSolve.subway.persistencia.interfaz.ConsultasYRespuestasDAO;
 import com.techAndSolve.subway.persistencia.interfaz.RutaGeneralDAO;
 import com.techAndSolve.subway.persistencia.interfaz.UsuarioDAO;
+import com.techAndSolve.subway.util.CalculadoraAritmetica;
 
 public class AdministradorDatosUsuario {
 	
@@ -54,8 +55,10 @@ public class AdministradorDatosUsuario {
 	}*/
 	
 	public void crearRespuesta(String idUsuario, Consulta consulta) {
-		Respuesta respuesta = new Respuesta(administradorRutas.obtenerTiempo(consulta),
-				consulta, new ArrayList<>(administradorRutas.obtenerRutaMasCercana(consulta)));
+		int tiempo = CalculadoraAritmetica.calcularTiempoTotalParaUnaRuta(
+				administradorRutas.obtenerListadoDeRutasASeguir(consulta), administradorRutas.obtenerTiempo(consulta));
+		Respuesta respuesta = new Respuesta(tiempo, consulta,
+				new ArrayList<>(administradorRutas.obtenerRutaMasCercana(consulta)));
 		if(existeElUsuario(idUsuario)) {
 			consultasYRespuestasDAO.actualizarRespuestasUsuario(respuesta, idUsuario);
 		}else {

@@ -11,9 +11,14 @@ export class PaginaInicialComponent implements OnInit {
   mostrarBarra = this.datosGlobales.mostrarBarra;
   usuarioActual = this.datosGlobales.usuarioActual;
 
-  constructor(private datosGlobales: DatosGlobales) { }
+  constructor( private datosGlobales: DatosGlobales) { }
 
   ngOnInit() {
+  }
+
+  salir(){
+    this.datosGlobales.usuarioActual = undefined;
+    this.datosGlobales.mostrarBarra = false;
   }
 
 }

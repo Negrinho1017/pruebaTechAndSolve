@@ -17,7 +17,8 @@ export class ConsultasComponent implements OnInit {
   listaEstaciones: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   rutaMasCorta: String[];
   datosUsuario: DatosUsuario;
-  usuario: Usuario 
+  usuario: Usuario;
+  loading: boolean;
   constructor(private consultasService: ConsultasService, private datosGlobales: DatosGlobales) { }
 
   ngOnInit() {
@@ -25,6 +26,7 @@ export class ConsultasComponent implements OnInit {
   }
 
   buscar() {
+    this.loading = true;
     this.consultasService.obtenerDatosUsuario(this.estacionOrigenSeleccionada, this.estacionDestinoSeleccionada)
       .subscribe(res => {
         this.datosUsuario = res;
@@ -33,8 +35,10 @@ export class ConsultasComponent implements OnInit {
         " y el tiempo estimado es: " + this.datosUsuario.tiempo + " minutos";
         var rutas = this.rutasASeguir(this.datosUsuario.subRutas);
         this.mensajeRutas(mensaje, rutas); 
+        this.loading = false;
       }, error => {
         this.mensajeError(error.error.mensaje);
+        this.loading = false;
       });
       this.crearRespuesta();
   }

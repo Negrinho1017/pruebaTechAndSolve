@@ -1,5 +1,10 @@
 <div *ngIf="mostrarBarra">
   <input type="button" *ngIf="usuarioActual.rol==2" class="btn btn-outline-dark" value="Listado de respuestas dadas al usuario"
       [routerLinkActive]="'active-link'" [routerLink]="['/respuestas-usuario']">
-  <input type="button" class="btn btn-outline-dark" value="Consultar" [routerLinkActive]="'active-link'" [routerLink]="['/consultas']">
+
+  <input type="button" class="btn btn-outline-dark" value="Consultar" [routerLinkActive]="'active-link'"
+      [routerLink]="['/consultas']">
+
+  <input type="button" class="btn btn-outline-dark" value="Salir" [routerLinkActive]="'active-link'"
+      [routerLink]="['/']" (click)="salir()">
 </div>
