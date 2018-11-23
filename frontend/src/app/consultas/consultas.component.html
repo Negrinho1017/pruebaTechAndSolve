@@ -10,9 +10,14 @@
     <br><br>
     <input type="button" class="btn btn-dark" value="Buscar ruta" (click)="buscar()"><br><br>
     <h2>Mapa: </h2>
-    <h4>Color de las rutas: <br><font color="red"><b>A</b></font>, <font color="orange"><b>B</b></font>, 
-        <font color="green"><b>C</b></font>, <font color="yellow"><b>D</b></font>, <font color="blue"><b>E</b></font>, 
-        <font color="black"><b>F</b></font></h4>
-    <img src="src/assets/mapa.PNG">
+    <h4>Colores de las rutas: 
+        <font color="white" style="background-color:red;"><b>&emsp;A&emsp;</b></font>
+        <font color="white" style="background-color:orange;"><b>&emsp;B&emsp;</b></font>
+        <font color="white" style="background-color:green;"><b>&emsp;C&emsp;</b></font>
+        <font color="white" style="background-color:yellow;"><b>&emsp;D&emsp;</b></font>
+        <font color="white" style="background-color:blue;"><b>&emsp;E&emsp;</b></font>
+        <font color="white" style="background-color:black;"><b>&emsp;F&emsp;</b></font>
+    </h4><br>
+    <img src="src/assets/mapa.PNG" >
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px'  }"></ngx-loading>
 </body>
