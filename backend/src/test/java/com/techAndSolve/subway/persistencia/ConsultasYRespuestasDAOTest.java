@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.times;
@@ -125,6 +126,14 @@ public class ConsultasYRespuestasDAOTest {
 		assertEquals("4", consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(1).getEstaciones().get(1).getId());
 		assertEquals(6, consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(1).getTiempo());
 		assertEquals(4, consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(0).getTiempo());
+	}
+	
+	@Test
+	public void actualizarRespuestaTest() {
+		when(mongoOperations.find(any(Query.class), eq(UsuarioEntidad.class), anyString())).thenReturn(listaUsuariosEntidad);
+		consultasYRespuestasDAO.actualizarRespuestasUsuario(r1, "1234");
+		consultasYRespuestasDAO.actualizarRespuestasUsuario(r2, "1234");
+		verify(mongoOperations, times(2)).updateFirst(any(Query.class), any(Update.class), eq(UsuarioEntidad.class), anyString());
 	}
 
 }

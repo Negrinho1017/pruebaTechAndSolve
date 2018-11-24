@@ -1,6 +1,5 @@
 package com.techAndSolve.subway.persistencia.builder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.techAndSolve.subway.dominio.CaminoEntreEstaciones;
@@ -15,13 +14,5 @@ public class RutaGeneralBuilder {
 	    List<CaminoEntreEstaciones> caminosEntreEstaciones = CaminoEntreEstacionesBuilder.convertirListaDeEntidadADominio(
 	    		rutaGeneralEntidad.getCaminosEntreEstaciones());
 	    return new RutaGeneral(estaciones, caminosEntreEstaciones);
-	}
-	
-	public static List<RutaGeneral> convertirListaDeEntidadADominio(List<RutaGeneralEntidad> rutasGeneralesEntidad) {
-		List<RutaGeneral> rutasGenerales = new ArrayList<>();
-		for(RutaGeneralEntidad rutaGeneralEntidad : rutasGeneralesEntidad) {
-			rutasGenerales.add(convertirDeEntidadADominio(rutaGeneralEntidad));
-		}
-		return rutasGenerales;
 	}
 }
