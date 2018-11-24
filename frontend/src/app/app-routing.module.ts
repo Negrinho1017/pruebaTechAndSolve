@@ -6,9 +6,10 @@ import { PaginaPrincipalComponent } from './pagina-principal/pagina-principal.co
 import { ConsultasComponent } from './consultas/consultas.component';
 import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
 import { AuthGuard } from './AuthGuard';
+import { AuthGuardInSession } from './AuthGuardInSession';
 
 const routes: Routes = [
-  { path: 'respuestas-usuario', component: ListadoRespuestasAlUsuarioComponent, canActivate: [AuthGuard] },
+  { path: 'respuestas-usuario', component: ListadoRespuestasAlUsuarioComponent, canActivate: [AuthGuardInSession] },
   { path: 'consultas', component: ConsultasComponent, canActivate: [AuthGuard] },
   { path: 'pagina-inicial', component: PaginaInicialComponent, canActivate: [AuthGuard] },
   { path: '', component: PaginaPrincipalComponent }

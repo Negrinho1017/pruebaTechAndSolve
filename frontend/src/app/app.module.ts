@@ -12,6 +12,7 @@ import { ConsultasComponent } from './consultas/consultas.component';
 import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
 import { NgxLoadingModule } from 'ngx-loading';
 import { AuthGuard } from './AuthGuard';
+import { AuthGuardInSession } from './AuthGuardInSession';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AuthGuard } from './AuthGuard';
     HttpModule,
     NgxLoadingModule
   ],
-  providers: [DatosGlobales, AuthGuard],
+  providers: [DatosGlobales, AuthGuard, AuthGuardInSession],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
