@@ -1,8 +1,5 @@
 package com.techAndSolve.subway.controlador;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.DatosUsuario;
-import com.techAndSolve.subway.dominio.Estacion;
-import com.techAndSolve.subway.dominio.SubRuta;
 import com.techAndSolve.subway.dominio.Usuario;
 import com.techAndSolve.subway.servicio.AdministradorDatosUsuario;
 import com.techAndSolve.subway.servicio.AdministradorRutas;

@@ -1,6 +1,7 @@
 package com.techAndSolve.subway.persistencia;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -24,31 +25,20 @@ import org.springframework.data.mongodb.core.query.Update;
 import com.techAndSolve.subway.dominio.Consulta;
 import com.techAndSolve.subway.dominio.Estacion;
 import com.techAndSolve.subway.dominio.Respuesta;
+import com.techAndSolve.subway.dominio.Usuario;
 import com.techAndSolve.subway.persistencia.entidad.ConsultaEntidad;
 import com.techAndSolve.subway.persistencia.entidad.EstacionEntidad;
 import com.techAndSolve.subway.persistencia.entidad.RespuestaEntidad;
 import com.techAndSolve.subway.persistencia.entidad.UsuarioEntidad;
-import com.techAndSolve.subway.persistencia.implementacion.ConsultasYRespuestasDAOImplementacion;
+import com.techAndSolve.subway.persistencia.implementacion.UsuarioDAOImplementacion;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ConsultasYRespuestasDAOTest {
+public class UsuarioDAOTest {
 	@InjectMocks
-	ConsultasYRespuestasDAOImplementacion consultasYRespuestasDAO;
+	UsuarioDAOImplementacion usuarioDAO;
 	
 	@Mock
 	MongoOperations mongoOperations;
-	
-	List<Respuesta> respuestas;
-	Respuesta r1;
-	Respuesta r2;
-	Consulta consultaRealizada;
-	Consulta consultaRealizada2;
-	List<Estacion> estaciones;
-	List<Estacion> estaciones2;
-	Estacion e1;
-	Estacion e2;
-	Estacion e3;
-	Estacion e4;
 	
 	List<RespuestaEntidad> respuestasEntidad;
 	RespuestaEntidad r1Entidad;
@@ -66,25 +56,7 @@ public class ConsultasYRespuestasDAOTest {
 	List<UsuarioEntidad> listaUsuariosEntidad;
 	
 	@Before
-	public void setUp() {
-		consultaRealizada = new Consulta(1, 2);
-		e1 = new Estacion("1", "1");
-		e2 = new Estacion("2", "2");
-		estaciones = new ArrayList<>();
-		estaciones.add(e1);
-		estaciones.add(e2);
-		respuestas = new ArrayList<>();
-		r1 = new Respuesta(4, consultaRealizada, estaciones);
-		consultaRealizada2 = new Consulta(3, 4);
-		e3 = new Estacion("3", "3");
-		e4 = new Estacion("4", "4");
-		estaciones2 = new ArrayList<>();
-		estaciones2.add(e3);
-		estaciones2.add(e4);
-		r2 = new Respuesta(4, consultaRealizada2, estaciones);
-		respuestas.add(r1);
-		respuestas.add(r2);
-		
+	public void setUp() {	
 		consultaRealizadaEntidad = new ConsultaEntidad(1, 2);
 		e1Entidad = new EstacionEntidad("1", "1");
 		e2Entidad = new EstacionEntidad("2", "2");
@@ -109,29 +81,31 @@ public class ConsultasYRespuestasDAOTest {
 	}
 	
 	@Test
-	public void crearRespuestaTest() {
-		consultasYRespuestasDAO.crearRespuesta(r1, "123");
-		consultasYRespuestasDAO.crearRespuesta(r2, "123");
-		verify(mongoOperations, times(2)).save(any(UsuarioEntidad.class), anyString());
+	public void existeElUsuarioYDatosIngresadosCorrectamenteTest() {
+		when(mongoOperations.exists(any(Query.class), anyString())).thenReturn(true);
+		assertTrue(usuarioDAO.existeElUsuario("1234"));
+		assertTrue(usuarioDAO.datosIngresadosCorrectamente("1234","1234"));
 	}
 	
 	@Test
-	public void obtenerRespuestasPorUsuarioTest() {
+	public void obtenerRolDelUsuarioTest() {
 		when(mongoOperations.find(any(Query.class), eq(UsuarioEntidad.class), anyString())).thenReturn(listaUsuariosEntidad);
-		assertEquals(2, consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").size());
-		assertEquals(1, consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(0).getConsultaRealizada().getEstacionOrigen());
-		assertEquals(2, consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(0).getConsultaRealizada().getEstacionDestino());
-		assertEquals("4", consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(1).getEstaciones().get(1).getId());
-		assertEquals(6, consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(1).getTiempo());
-		assertEquals(4, consultasYRespuestasDAO.obtenerRespuestasPorUsuario("1234").get(0).getTiempo());
+		assertEquals(1, usuarioDAO.obtenerRolDelUsuario("1234"));
 	}
 	
 	@Test
-	public void actualizarRespuestaTest() {
+	public void obtenerUsuarioPorIdTest() {
 		when(mongoOperations.find(any(Query.class), eq(UsuarioEntidad.class), anyString())).thenReturn(listaUsuariosEntidad);
-		consultasYRespuestasDAO.actualizarRespuestasUsuario(r1, "1234");
-		consultasYRespuestasDAO.actualizarRespuestasUsuario(r2, "1234");
-		verify(mongoOperations, times(2)).updateFirst(any(Query.class), any(Update.class), eq(UsuarioEntidad.class), anyString());
+		assertEquals(Usuario.class, usuarioDAO.obtenerUsuarioPorId("1234").getClass());
+		assertEquals("1", usuarioDAO.obtenerUsuarioPorId("1234").getRespuestasObtenidas().get(0).getEstaciones().get(0).getId());
+		assertEquals("1234", usuarioDAO.obtenerUsuarioPorId("1234").getIdentificacion());
+		verify(mongoOperations, times(3)).find(any(Query.class), eq(UsuarioEntidad.class), anyString());
+	}
+	
+	@Test
+	public void crearUsuarioTest() {
+		usuarioDAO.crearUsuario("1234", "1234");
+		verify(mongoOperations, times(1)).save(any(UsuarioEntidad.class), anyString());
 	}
 
 }

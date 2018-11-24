@@ -3,8 +3,8 @@ package com.techAndSolve.subway.persistencia;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.eq;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +28,6 @@ public class RutasDAOTest {
 	
 	@Mock
 	MongoOperations mongoOperations;
-	
-	private static final String RUTAS = "rutas";
 	
 	List<Integer> rutaA; 
 	List<Integer> rutaB;
