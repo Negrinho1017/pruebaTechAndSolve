@@ -20,11 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
-import com.techAndSolve.subway.dominio.Consulta;
-import com.techAndSolve.subway.dominio.Estacion;
-import com.techAndSolve.subway.dominio.Respuesta;
 import com.techAndSolve.subway.dominio.Usuario;
 import com.techAndSolve.subway.persistencia.entidad.ConsultaEntidad;
 import com.techAndSolve.subway.persistencia.entidad.EstacionEntidad;

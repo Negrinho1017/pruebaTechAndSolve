@@ -24,7 +24,6 @@ import com.techAndSolve.subway.dominio.RutaGeneral;
 import com.techAndSolve.subway.persistencia.entidad.CaminoEntreEstacionesEntidad;
 import com.techAndSolve.subway.persistencia.entidad.EstacionEntidad;
 import com.techAndSolve.subway.persistencia.entidad.RutaGeneralEntidad;
-import com.techAndSolve.subway.persistencia.entidad.UsuarioEntidad;
 import com.techAndSolve.subway.persistencia.implementacion.RutaGeneralDAOImplementacion;
 
 @RunWith(MockitoJUnitRunner.class)
