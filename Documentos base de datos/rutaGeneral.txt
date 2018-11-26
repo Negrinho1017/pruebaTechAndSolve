@@ -1,0 +1,428 @@
+{
+    "idRutaGeneral" : 1,
+    "estaciones" : [ 
+        {
+            "_id" : "1",
+            "name" : "1"
+        }, 
+        {
+            "_id" : "2",
+            "name" : "2"
+        }, 
+        {
+            "_id" : "3",
+            "name" : "3"
+        }, 
+        {
+            "_id" : "4",
+            "name" : "4"
+        }, 
+        {
+            "_id" : "5",
+            "name" : "5"
+        }, 
+        {
+            "_id" : "6",
+            "name" : "6"
+        }, 
+        {
+            "_id" : "7",
+            "name" : "7"
+        }, 
+        {
+            "_id" : "8",
+            "name" : "8"
+        }, 
+        {
+            "_id" : "9",
+            "name" : "9"
+        }, 
+        {
+            "_id" : "10",
+            "name" : "10"
+        }, 
+        {
+            "_id" : "11",
+            "name" : "11"
+        }, 
+        {
+            "_id" : "12",
+            "name" : "12"
+        }, 
+        {
+            "_id" : "13",
+            "name" : "13"
+        }, 
+        {
+            "_id" : "14",
+            "name" : "14"
+        }, 
+        {
+            "_id" : "15",
+            "name" : "15"
+        }
+    ],
+    "caminosEntreEstaciones" : [ 
+        {
+            "_id" : "1_2",
+            "source" : {
+                "_id" : "1",
+                "name" : "1"
+            },
+            "destination" : {
+                "_id" : "2",
+                "name" : "2"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "2_3",
+            "source" : {
+                "_id" : "2",
+                "name" : "2"
+            },
+            "destination" : {
+                "_id" : "3",
+                "name" : "3"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "3_7",
+            "source" : {
+                "_id" : "3",
+                "name" : "3"
+            },
+            "destination" : {
+                "_id" : "7",
+                "name" : "7"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "7_4",
+            "source" : {
+                "_id" : "7",
+                "name" : "7"
+            },
+            "destination" : {
+                "_id" : "4",
+                "name" : "4"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "4_5",
+            "source" : {
+                "_id" : "4",
+                "name" : "4"
+            },
+            "destination" : {
+                "_id" : "5",
+                "name" : "5"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "5_6",
+            "source" : {
+                "_id" : "5",
+                "name" : "5"
+            },
+            "destination" : {
+                "_id" : "6",
+                "name" : "6"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "2_11",
+            "source" : {
+                "_id" : "2",
+                "name" : "2"
+            },
+            "destination" : {
+                "_id" : "11",
+                "name" : "11"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "11_12",
+            "source" : {
+                "_id" : "11",
+                "name" : "11"
+            },
+            "destination" : {
+                "_id" : "12",
+                "name" : "12"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "12_13",
+            "source" : {
+                "_id" : "12",
+                "name" : "12"
+            },
+            "destination" : {
+                "_id" : "13",
+                "name" : "13"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "13_14",
+            "source" : {
+                "_id" : "13",
+                "name" : "13"
+            },
+            "destination" : {
+                "_id" : "14",
+                "name" : "14"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "9_14",
+            "source" : {
+                "_id" : "9",
+                "name" : "9"
+            },
+            "destination" : {
+                "_id" : "14",
+                "name" : "14"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "14_15",
+            "source" : {
+                "_id" : "14",
+                "name" : "14"
+            },
+            "destination" : {
+                "_id" : "15",
+                "name" : "15"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "9_10",
+            "source" : {
+                "_id" : "9",
+                "name" : "9"
+            },
+            "destination" : {
+                "_id" : "10",
+                "name" : "10"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "7_8",
+            "source" : {
+                "_id" : "7",
+                "name" : "7"
+            },
+            "destination" : {
+                "_id" : "8",
+                "name" : "8"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "8_9",
+            "source" : {
+                "_id" : "8",
+                "name" : "8"
+            },
+            "destination" : {
+                "_id" : "9",
+                "name" : "9"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "1_2",
+            "source" : {
+                "_id" : "2",
+                "name" : "2"
+            },
+            "destination" : {
+                "_id" : "1",
+                "name" : "1"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "2_3",
+            "source" : {
+                "_id" : "3",
+                "name" : "3"
+            },
+            "destination" : {
+                "_id" : "2",
+                "name" : "2"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "3_7",
+            "source" : {
+                "_id" : "7",
+                "name" : "7"
+            },
+            "destination" : {
+                "_id" : "3",
+                "name" : "3"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "7_4",
+            "source" : {
+                "_id" : "4",
+                "name" : "4"
+            },
+            "destination" : {
+                "_id" : "7",
+                "name" : "7"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "4_5",
+            "source" : {
+                "_id" : "5",
+                "name" : "5"
+            },
+            "destination" : {
+                "_id" : "4",
+                "name" : "4"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "5_6",
+            "source" : {
+                "_id" : "6",
+                "name" : "6"
+            },
+            "destination" : {
+                "_id" : "5",
+                "name" : "5"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "2_11",
+            "source" : {
+                "_id" : "11",
+                "name" : "11"
+            },
+            "destination" : {
+                "_id" : "2",
+                "name" : "2"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "11_12",
+            "source" : {
+                "_id" : "12",
+                "name" : "12"
+            },
+            "destination" : {
+                "_id" : "11",
+                "name" : "11"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "12_13",
+            "source" : {
+                "_id" : "13",
+                "name" : "13"
+            },
+            "destination" : {
+                "_id" : "12",
+                "name" : "12"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "13_14",
+            "source" : {
+                "_id" : "14",
+                "name" : "14"
+            },
+            "destination" : {
+                "_id" : "13",
+                "name" : "13"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "9_14",
+            "source" : {
+                "_id" : "14",
+                "name" : "14"
+            },
+            "destination" : {
+                "_id" : "9",
+                "name" : "9"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "14_15",
+            "source" : {
+                "_id" : "15",
+                "name" : "15"
+            },
+            "destination" : {
+                "_id" : "14",
+                "name" : "14"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "9_10",
+            "source" : {
+                "_id" : "10",
+                "name" : "10"
+            },
+            "destination" : {
+                "_id" : "9",
+                "name" : "9"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "7_8",
+            "source" : {
+                "_id" : "8",
+                "name" : "8"
+            },
+            "destination" : {
+                "_id" : "7",
+                "name" : "7"
+            },
+            "weight" : 4
+        }, 
+        {
+            "_id" : "8_9",
+            "source" : {
+                "_id" : "9",
+                "name" : "9"
+            },
+            "destination" : {
+                "_id" : "8",
+                "name" : "8"
+            },
+            "weight" : 4
+        }
+    ],
+    "_class" : "com.techAndSolve.subway.persistencia.entidad.RutaGeneralEntidad"
+}

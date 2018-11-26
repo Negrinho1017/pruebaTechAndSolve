@@ -70,7 +70,6 @@ public class UsuarioDAOTest {
 		r2Entidad = new RespuestaEntidad(6, consultaRealizada2Entidad, estaciones2Entidad);
 		respuestasEntidad.add(r1Entidad);
 		respuestasEntidad.add(r2Entidad);
-		
 		usuarioEntidad = new UsuarioEntidad(1, respuestasEntidad, "1234", "1234");
 		listaUsuariosEntidad = new ArrayList<>();
 		listaUsuariosEntidad.add(usuarioEntidad);

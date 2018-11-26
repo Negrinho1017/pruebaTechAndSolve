@@ -23,7 +23,6 @@ public class Dijkstra {
     private Map<Estacion, Integer> distance;
 
     public Dijkstra(RutaGeneral graph) {
-        // create a copy of the array so that we can operate on this array
         this.nodes = new ArrayList<Estacion>(graph.getVertexes());
         this.edges = new ArrayList<CaminoEntreEstaciones>(graph.getEdges());
     }
@@ -113,14 +112,9 @@ public class Dijkstra {
         }
     }
 
-    /*
-     * This method returns the path from the source to the selected target and
-     * NULL if no path exists
-     */
     public LinkedList<Estacion> getPath(Estacion target) {
         LinkedList<Estacion> path = new LinkedList<Estacion>();
         Estacion step = target;
-        // check if a path exists
         if (predecessors.get(step) == null) {
             return null;
         }
@@ -129,7 +123,6 @@ public class Dijkstra {
             step = predecessors.get(step);
             path.add(step);
         }
-        // Put it into the correct order
         Collections.reverse(path);
         return path;
     }
